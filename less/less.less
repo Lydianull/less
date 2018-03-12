@@ -1,0 +1,418 @@
+body{
+	margin:0;
+	padding:0;
+}
+a{
+	text-decoration: none;
+}
+//布局样式
+#layout(@name){
+
+	& when(@name=header){
+		height: 60px;
+		#bg-color(black);
+	}
+	& when(@name=banner){
+		height: 560px;
+	    background-color:#6a6593;
+	}
+	& when(@name=course){
+		height: 1000px;
+
+	}
+	& when(@name=footer){
+		height: 98px;
+		#bg-color(black);
+	}
+	position:relative;
+}
+
+#bg-color(@name){
+
+	& when(@name=black){
+		background-color:#000;
+	}
+	& when(@name=white){
+		background-color:#fff;
+	}
+	& when(@name=light){
+		background-color: #363c41;
+	}
+}
+
+#ft-size(@name){
+
+	& when(@name=none){
+		font-size: 0;
+	}
+	& when(@name=small){
+		font-size:12px;
+	}
+	& when(@name=medium){
+		font-size:14px;
+	}
+	& when(@name=large){
+		font-size:16px;
+	}
+}
+
+#color(@name){
+
+	& when(@name=black){
+		color:#07111b;
+	}
+	& when(@name=white){
+		color:#fff;
+	}
+	& when(@name=weak){
+		color:#959aa0;
+	}
+	& when(@name=red){
+		color:red;
+	}
+	& when(@name=dark){
+		color:#ccc;
+	}
+}
+
+//课程模块样式定义
+#course-box(){
+	width:283px;
+	height: 306px;
+	float:left;
+	margin:0 20px 40px 0;
+	box-shadow: 0 4px 8px rgba(7,17,27,.1);
+	position: relative;
+	top:-102px;
+	#bg-color(white);
+	#bg-img("titlebg.png");
+	#decorate-bottom();
+	&:nth-child(4n){
+		margin-right: 0;
+    }
+    &:last-child{
+		left: 50%;
+		margin-left: -141px;
+    }
+	
+}
+#decorate-bottom(){
+	&:before{
+		content:'';
+		display: block;
+		width: 98%;
+		height: 3px;
+		left: 1%;
+		bottom:-5px;
+		position: absolute;
+		box-shadow: 0 8px 16px rgba(7,17,27,.2);
+		#radius(4px);
+		#bg-color(white);
+	}
+	&:after{
+		content:'';
+		display: block;
+		width: 96%;
+		height: 3px;
+		left: 2%;
+		bottom:-11px;
+		position: absolute;
+		box-shadow: 0 8px 16px rgba(7,17,27,.2);
+		#radius(4px);
+		#bg-color(white);
+	}
+
+}
+
+//功能样式定义
+#radius(@radius:50%){
+	border-radius: @radius;
+}
+#bg-img(@src){
+	background-image: url("../imgs/@{src}");
+}
+#square(@w:10px){
+	width: @w;
+	height: @w;
+}
+#line-height(@h){
+	height: @h;
+	line-height: @h;
+}
+//通用样式
+.fl(){
+	float: left;
+}
+.fr(){
+	float:right;
+}
+.clearfix(){
+	&:after{
+		content:'';
+		display: block;
+		font-size: 0;
+		line-height: 0;
+		clear: both;
+		zoom:1;
+	}
+}
+.cover-background(){
+	background-size:contain;
+	background+_:no-repeat center;
+}
+
+
+.header{
+	#layout(header);
+	.logo{
+		width: 128px;
+		height: 40px;
+		margin:10px 25px;
+		background+_:url(../imgs/logo.png);
+		.cover-background();
+		.fl();
+	}
+	.nav{
+		height: 100%;
+		.fl();
+		&__item{
+			display: block;
+			float: left;
+			#line-height(60px);
+			padding: 0 25px;
+			#color(white);
+			&_icon_new{
+				background: url("../imgs/icon-new.png") no-repeat 86px 7px;
+
+			}
+			&:hover,&_icon_new{
+				#bg-color(light);
+			}
+		}
+	}
+	.search{
+		padding-right: 25px;
+		position:relative;
+		margin:12px 25px;
+		height: 36px;
+		.fr();
+		&__input{
+			width: 242px;
+			border:none;
+			outline: none;
+			#bg-color(black);
+			border-bottom: 1px solid #ccc;
+			#line-height(36px);
+		}
+		&::before{
+			content:'前端入门';
+			display: block;
+			width: 72px;
+			text-align: center;
+			position: absolute;
+			top: 0;
+			left: 0;
+			#bg-color(light);
+			#color(dark);
+			#ft-size(small);
+			#line-height(30px);
+		}
+		&__submit{
+			display: block;
+			position: absolute;
+			right:35px;
+			top:4px;
+			background-position:0 0;
+			#bg-img("icon-1-sprite_w22.png");
+			#square(22px);
+		}
+	}
+	.profile{
+		.fr();
+		&__item{
+			display: block;
+			position: relative;
+			.fl();
+			#square(60px);
+			margin-right: 1px;
+		}
+		&__lock:before,&__bell:before,&__ava:before{
+			content: '';
+			display: block;
+			position: absolute;
+			left: 19px;
+			top: 19px;
+			#square(22px);
+		}
+		&__lock:before{
+			#bg-img("shopcar.png");
+			background-position: 0 -214px;
+		}
+		&__bell:before{
+			#bg-img("icon-1-sprite_w22.png");
+			background-position: 0 -44px;
+		}
+		&__ava:before{
+			#bg-img("ava.jpg");
+			background-size: contain;
+			#square(30px);
+			left: 15px;
+			top: 15px;
+			#radius(50%);
+		}
+		&__item:hover{
+			#bg-color(light);
+		}
+	}
+}
+.banner{
+	#layout(banner);
+	background:url("../imgs/bg.jpg") no-repeat center;
+	background-size:cover;
+}
+.course{
+	#layout(course);
+	&__list{
+		width: 1200px;
+		margin:0 auto;
+		position:relative;
+		.clearfix();
+		.standard-course{
+			#course-box();
+
+			&__plan{
+				position: absolute;
+				top:110px;
+				width: 283px-50px;
+				padding:16px 25px 0 25px;
+				#bg-img("titlebg.png");
+				-webkit-transition: all 1s;
+				     -o-transition: all 1s;
+				        transition: all 1s;
+			}
+			&__cover{
+				height: 110px;
+				img{
+					width: 100%;
+				}
+			}
+			&__caption{
+				/*#ft-size(large);*/
+				#ft-size(none);
+				#color(black);
+				#line-height(23px);
+				height: 50px;
+				transition: all 1s;
+			}
+			&__times{
+				#ft-size(small);
+				#color(weak);
+				#line-height(30px);
+				border-bottom:1px solid #d9dde1;	
+			}
+			&__person{
+				margin-left: 15px;
+			}
+			&__price{
+				position: absolute;
+				bottom:0;
+				padding: 20px 35px;
+				#ft-size(small);
+				#color(red);
+				#line-height(30px);
+				i{
+					font-style: normal;
+					padding:0 3px;
+					vertical-align:super; 
+				}
+		    }
+		    &__plan:hover{
+					top:80px;
+		        }
+		    &__plan:hover .standard-course__caption{
+					#ft-size(large);
+		        }
+		}		
+	}
+}
+.footer{
+	#layout(footer);
+	#ft-size(small);
+	.footer-link{
+		width: 1200px;
+		margin:0 auto;
+		height: 12px;
+		#line-height(12px);
+		padding:30px 0 16px 40px;
+
+		&__item{
+			display: inline-block;
+			margin-right: 30px;
+			#color(weak);
+			.fl();
+		}
+		&__item:hover{
+			#color(white);
+		}
+	}
+	.footer-copy{
+		width: 1200px;
+		margin:0 auto;
+		padding:0 0 0 235px;
+		#line-height(12px);
+		#color(weak);
+	}
+	.footer-share{
+		position: absolute;
+		width: 135px;
+		height: 32px;
+		right: 40px;
+		top:33px;
+
+		&__item{
+			display: block;
+			margin-right:13px;
+			.fl();
+			#square(32px);
+			#bg-img("footer-sprite.png");
+			background-color:transparent;
+			opacity: .3;
+			-webkit-transition: opacity 0.2s;
+			     -o-transition: opacity 0.2s;
+			        transition: opacity 0.2s;
+			&_i_1{
+				background-position: 0 -279px;
+				.weixin{
+					position: absolute;
+				    display: none;
+				    width: 170px;
+				    height: 220px;
+				    left: -69px;
+				    bottom: 35px;
+					#bg-img("footer-sprite.png");
+				}
+			}
+
+			&_i_2{
+				background-position: 0 -321px;
+			}
+			&_i_3{
+				background-position: 0 -363px;
+			}
+			&_i_1:hover,
+			&_i_2:hover,
+			&_i_3:hover{
+				opacity: 1;	
+			}
+			&_i_1:hover .weixin{
+				display: block;
+			}
+			&_i_1 .weixin:hover{
+				display: block;
+			}
+
+		}
+		
+
+	}
+}
